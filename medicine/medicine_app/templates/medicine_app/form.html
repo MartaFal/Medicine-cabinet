@@ -1,0 +1,14 @@
+{% extends "medicine_app/base.html" %}
+
+{% block content %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Zapisz">
+</form>
+<button>
+
+<a href=" {% url 'add-user' %}">Zarejestruj się</a>
+</button>
+{% endblock %}

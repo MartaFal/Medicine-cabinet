@@ -1,0 +1,44 @@
+{% extends "medicine_app/base.html" %}
+
+{% block content %}
+<header>
+    <button type="button">
+        <a href="/medicine/delete/{{medicine.id}}">Usuń</a>
+    </button>
+    <button>
+        <a href="/medicine/modify/{{medicine.id}}">Edytuj</a>
+    </button>
+</header>
+
+
+    <h1> {{medicine.name}}</h1>
+        <h3> Zastosowanie:</h3>
+           <p>{{medicine.description}}<p/>
+        <h3> Kategoria:</h3>
+         {% for category in medicine.category.all %}
+            <p> {{category.name}}</p>
+            {% endfor %}
+        <h3> Składniki:</h3>
+            <p>{{medicine.ingredients}}</p>
+        <h3> Dawkowanie:</h3>
+            <p>{{medicine.dosage}}</p>
+        <h3> Przeciwwskaznia:</h3>
+            <p>{{medicine.contraindications}}</p>
+        <h3> Uwagi:</h3>
+            <p>{{medicine.comments}}</p>
+        <h3> Data ważności:</h3>
+            <p>{{medicine.expiration_date}}</p>
+        <h3> Przeznaczony dla:</h3>
+            <p>wybierz członka rodziny</p>
+        <h3> Sugerowana dawka:</h3>
+            <p>trzeba policzyć</p>
+        <h3> Stałe przyjmowanie:</h3>
+            <p>{{medicine.taken_continuously}}</p>
+        <h3> Data otwarcia:</h3>
+            <p>{{medicine.opening_date}}</p>
+        <h3> Okres trwałości:</h3>
+            <p> {{medicine.shelf_life}} dni</p>
+        <h3> Data przydatności:</h3>
+            <p> {{medicine.usefulness_date}} </p>
+
+{% endblock %}

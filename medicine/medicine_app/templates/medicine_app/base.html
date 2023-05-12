@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Home Page</title>
+    <style>
+        body {
+            background-color: #f3f3f3;
+        }
+
+        h1 {
+            color: Tomato;
+            text-align: center;
+            text-decoration-line: underline;
+        }
+
+        p {
+          font-family: verdana;
+          font-size: 16px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 14px 16px;
+            background-color: lightgrey;
+            overflow: hidden;
+        }
+
+        li {
+            display: inline;
+        }
+
+        li a {
+            display: inline;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: Tomato;
+        }
+
+        .footer {
+               position: fixed;
+               left: 0;
+               bottom: 0;
+               width: 100%;
+               height: 30px;
+               background-color: lightgrey;
+               color: black;
+               text-align: center;
+            /*vertical-align: middle;*/
+            margin-top: 5px;
+            }
+        .text-muted {
+            height: 100%;
+            align-items: center;
+        }
+        .myfield {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul>
+            <li><a href=" {% url '' %}">Strona główna</a></li>
+            <li><a href=" {% url 'cabinet' %}">Moja apteczka</a></li>
+            <li><a href="#contact">Moje konto</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href=" {% url 'logout' %}"> Wyloguj</a> Użytkownik {{request.user.username}} jest zalogowany</li>
+            {% else %}
+            <li><a href=" {% url 'login' %}"> Zaloguj</a> Użytkownik nie jest zalogowany</li>
+
+             {% endif %}
+        </ul>
+    </header>
+
+    {% block content %}{% endblock %}
+
+<footer class="footer">
+    <span class="text-muted">@ Marta Faltyniak</span>
+</footer>
+</body>
+</html>

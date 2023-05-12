@@ -1,0 +1,45 @@
+{% extends "medicine_app/base.html" %}
+
+{% block content %}
+
+    <h1> Leki w mojej apteczce: </h1>
+ <button type="button">
+    <a href=" {% url 'add-medicine' %}">Dodaj lek</a>
+    </button>
+  <table>
+      <thead>
+        <tr >
+            <th scope="col" class="col-1">Lp.</th>
+            <th scope="col" class="col-2">Nazwa</th>
+            <th scope="col" class="col-2 center"></th>
+        </tr>
+      </thead>
+
+      {% for medicine in medicines %}
+      <tbody>
+      <tr>
+          <th> {{medicine.id}}</th>
+          <td> {{medicine.name}}</td>
+          <td>
+              <button type="button">
+                <a href="/medicine/delete/{{medicine.id}}"
+                    >Usuń</a>
+              </button>
+              <button>
+                <a href="/medicine_details/{{medicine.id}}">Szczegóły</a>
+              </button>
+              <button>
+              <a href="/medicine/modify/{{medicine.id}}">Edytuj</a>
+              </button>
+
+          </td>
+      </tr>
+
+
+        {% endfor %}
+
+
+   </tbody>
+  </table>
+
+{% endblock %}
