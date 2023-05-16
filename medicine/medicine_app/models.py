@@ -14,7 +14,7 @@ DISEASE_CHOICE = (
     (7, "odporność"),
     (8, "katar"),
     (9, "oczy"),
-    (10, "układ pokoarmowy"),
+    (10, "układ pokarmowy"),
     (11, "skaleczenia"),
     (12, "ukąszenia owadów"),
     (13, "antybiotyk"),
@@ -22,20 +22,22 @@ DISEASE_CHOICE = (
 )
 
 
-class FamilyMember(models.Model):
-    first_name = models.CharField(max_length=64)
-    last_name = models.CharField(max_length=64)
-    weight = models.DecimalField(max_digits=6, decimal_places=2)
-    date_of_birth = models.DateField()
+# class FamilyMember(models.Model):
+#     first_name = models.CharField(max_length=64)
+#     last_name = models.CharField(max_length=64)
+#     weight = models.DecimalField(max_digits=6, decimal_places=2)
+#     date_of_birth = models.DateField()
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     relationship = models.CharField(max_length=64)
 
 
 """Logged-in user who owns the medicine cabinet. 
    May have family members who use the medicines in the first aid kit."""
 
 
-class Owner(models.Model):
-    name = models.OneToOneField(User, on_delete=models.CASCADE)
-    family_member = models.ForeignKey(FamilyMember, on_delete=models.CASCADE)
+# class Owner(models.Model):
+#     name = models.OneToOneField(User, on_delete=models.CASCADE)
+#     family_member = models.ForeignKey(FamilyMember, on_delete=models.CASCADE)
 
 
 """A keyword that allows to search for a specific drug."""
@@ -75,7 +77,7 @@ class Medicine(models.Model):
 
 class FirstAidKit(models.Model):
     name = models.CharField(max_length=128)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    medicine = models.ManyToManyField(Medicine)
+    user = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
+    medicine = models.ManyToManyField(Medicine, null=True)
 
 
