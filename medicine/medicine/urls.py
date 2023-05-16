@@ -24,11 +24,16 @@ urlpatterns = [
     path('', med_views.MainView.as_view(), name=""),
     path('add_medicine/', med_views.AddMedicineView.as_view(), name="add-medicine"),
     path('cabinet/', med_views.MedicineCabinetView.as_view(), name="cabinet"),
+    path('add_cabinet/', med_views.NewFirstAidKitView.as_view(), name="new_cabinet"),
     path('medicine_details/<int:medicine_id>/', med_views.MedicineDetailsView.as_view(), name="medicine-details"),
     path('medicine/delete/<int:medicine_id>/', med_views.DeleteMedicineView.as_view(), name="delete-medicine"),
-    path('medicine/modify/<int:pk>/', med_views.MedicineUpdateView.as_view(), name="modify_medicine"),
+    path('medicine/modify/<pk>/', med_views.MedicineUpdateView.as_view(), name="modify_medicine"),
+    path('medicine/duplicate/<int:medicine_id>/', med_views.DuplicateMedicineView.as_view(), name="duplicate"),
     path('login/', med_views.LoginView.as_view(), name="login"),
     path('logout/', med_views.LogOutView.as_view(), name="logout"),
     path('add_user/', med_views.AddUserView.as_view(), name="add-user"),
+ #   path('add_family_member/', med_views.AddFamilyMemberView.as_view(), name="add_family"),
+ #   path('family/', med_views.FamilyMemberView.as_view(), name="family"),
+    path('users_list/', med_views.UsersView.as_view(), name="users_list"),
 ]
 

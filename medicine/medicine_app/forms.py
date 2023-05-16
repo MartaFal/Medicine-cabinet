@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from .models import FamilyMember, Medicine
+from .models import Medicine # FamilyMember,
 from datetime import datetime
 
 User = get_user_model()
@@ -22,7 +22,7 @@ class MedicineForm(forms.Form):
         (7, "odporność"),
         (8, "katar"),
         (9, "oczy"),
-        (10, "układ pokoarmowy"),
+        (10, "układ pokarmowy"),
         (11, "skaleczenia"),
         (12, "ukąszenia owadów"),
         (13, "antybiotyk"),
@@ -45,15 +45,21 @@ class MedicineForm(forms.Form):
     expiration_date = forms.DateField(
         label="Data ważności",
         widget=forms.widgets.DateInput(attrs={'type': 'date'}),
-        # initial=datetime.date.today,
-
-    )
+       )
     taken_continuously = forms.BooleanField(label="Przyjmowany na stałe")
     recommended_dose = forms.CharField(label="Rekomendowana dawka", max_length=64)
-    opening_date = forms.DateField(label="Data otwarcia", required=False)
+    opening_date = forms.DateField(
+        label="Data otwarcia",
+        widget=forms.widgets.DateInput(attrs={'type': 'date'}),
+        required=False
+    )
     shelf_life = forms.IntegerField(label="Czas przydatności od otwarcia w dniach")
 #    intended_for = forms.CharField(label="Przeznaczony dla:")
 
+class DuplicateMedicineForm(forms.Form):
+    class Meta:
+        model = Medicine
+        fields = '__all__'
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
@@ -61,14 +67,15 @@ class LoginForm(forms.Form):
 
 
 class AddUserForm(forms.Form):
-    username = forms.CharField(max_length=150)
-    password1 =forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(max_length=64)
+    password1 = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput)
-    name = forms.CharField(max_length=150)
-    age = forms.IntegerField(label="Wiek")
-    weight = forms.IntegerField()
+    first_name = forms.CharField(max_length=64)
+    last_name = forms.CharField(max_length=128)
+  # #  age = forms.IntegerField(label="Wiek")
+  #  # weight = forms.IntegerField()
     email = forms.EmailField()
-    family_member = forms.CharField()  #pole wyboru członka rodziny
+  #   family_member = forms.CharField()  #pole wyboru członka rodziny
   #  permissions = forms.ChoiceField(choices=(
   #      ("user_add", "Add user perm"),
  #       ("user_change", "Change user perm")
@@ -84,3 +91,12 @@ class AddUserForm(forms.Form):
             raise ValidationError("Hasła nie są takie same")
         if username and User.objects.filter(username=username).exists():
             raise ValidationError("Użytkownik już istnieje")
+
+
+class NewFirstAidKitForm(forms.Form):
+    name=forms.CharField(label="Nazwa", max_length=64)
+
+# class FamilyMemberForm(forms.Form):
+#     class Meta:
+#         model = FamilyMember
+#         fields = ['first_name', 'last_name', 'weight', 'date_of_birth', 'relationship']

@@ -1,0 +1,9 @@
+{% extends "medicine_app/base.html" %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Dodaj członka rodziny">
+    </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "medicine_app/base.html" %}
+
+{% block content %}
+
+    <h1> Użytkownicy: </h1>
+ <button type="button">
+    <a href=" {% url 'logout' %}">wyloguj się</a>
+    </button>
+  <table>
+      <thead>
+        <tr >
+            <th scope="col" class="col-1">Lp.</th>
+            <th scope="col" class="col-2">Login</th>
+            <th scope="col" class="col-2 center">Imię</th>
+            <th scope="col" class="col-2 center">Nazwisko</th>
+        </tr>
+      </thead>
+
+      {% for user in users %}
+      <tbody>
+          <tr>
+              <th> {{user.id}}</th>
+              <td> {{user.username}}</td>
+              <td> {{user.first_name}}</td>
+              <td> {{user.last_name}}</td>
+          </tr>
+      {% endfor %}
+
+      </tbody>
+  </table>
+
+{% endblock %}
